@@ -20,6 +20,7 @@ import io.nlopez.toolkit.sample.model.TextImageAndButtonItem;
 import io.nlopez.toolkit.sample.views.TextAndImageItemView;
 import io.nlopez.toolkit.sample.views.TextImageAndButtonItemView;
 import io.nlopez.toolkit.utils.ViewEventListener;
+import io.nlopez.toolkit.views.BindableLayout;
 
 /**
  * Created by Nacho Lopez on 28/10/13.
@@ -76,7 +77,7 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
             }
         }
 
-        Map<Class, Class> mapping = new HashMap<Class, Class>();
+        Map<Class, Class<? extends BindableLayout>> mapping = new HashMap<Class, Class<? extends BindableLayout>>();
         mapping.put(TextAndImageItem.class, TextAndImageItemView.class);
         mapping.put(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
 

@@ -20,17 +20,17 @@ import io.nlopez.toolkit.views.BindableLayout;
  */
 public class MultiAdapter extends BaseAdapter {
 
-    protected Map<Class, Class> itemViewMapping;
+    protected Map<Class, Class<? extends BindableLayout>> itemViewMapping;
     protected List<Class> itemClassArray;
     protected List listItems;
     protected ViewEventListener viewEventListener;
     protected BindableLayoutBuilder builder;
 
-    public MultiAdapter(Map<Class, Class> itemViewMapping, List listItems) {
+    public MultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
         this(itemViewMapping, listItems, createDefaultBuilder(itemViewMapping));
     }
 
-    public MultiAdapter(Map<Class, Class> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
+    public MultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
         this.listItems = listItems;
         this.itemViewMapping = itemViewMapping;
         this.builder = builder;
@@ -125,7 +125,7 @@ public class MultiAdapter extends BaseAdapter {
         return viewGroup;
     }
 
-    private static BindableLayoutBuilder createDefaultBuilder(final Map<Class, Class> itemViewMapping) {
+    private static BindableLayoutBuilder createDefaultBuilder(final Map<Class, Class<? extends BindableLayout>> itemViewMapping) {
         return new BindableLayoutBuilder() {
             @Override
             public BindableLayout build(Context context, Object item) {
