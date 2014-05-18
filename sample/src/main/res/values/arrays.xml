@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="navigation_list">
+        <item>SingleAdapter example</item>
+        <item>MultiAdapter example</item>
+    </string-array>
+</resources>

@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import io.nlopez.toolkit.utils.BindableLayoutBuilder;
 import io.nlopez.toolkit.utils.ThreadHelper;
@@ -16,42 +18,44 @@ import io.nlopez.toolkit.views.BindableLayout;
 /**
  * Created by mrm on 18/05/14.
  */
-public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseAdapter {
+public class MultiAdapter extends BaseAdapter {
 
-    protected Class viewClass;
-    protected List<T> listItems;
-    protected ViewEventListener<T> viewEventListener;
-    protected BindableLayoutBuilder<T, Q> builder;
+    protected Map<Class, Class> itemViewMapping;
+    protected List<Class> itemClassArray;
+    protected List listItems;
+    protected ViewEventListener viewEventListener;
+    protected BindableLayoutBuilder builder;
 
-    public SingleViewTypeAdapter(Class<Q> viewClass, List<T> listItems) {
-        this(viewClass, listItems, SingleViewTypeAdapter.<T, Q>createDefaultBuilder(viewClass));
+    public MultiAdapter(Map<Class, Class> itemViewMapping, List listItems) {
+        this(itemViewMapping, listItems, createDefaultBuilder(itemViewMapping));
     }
 
-    public SingleViewTypeAdapter(Class<Q> viewClass, List<T> listItems, BindableLayoutBuilder<T, Q> builder) {
+    public MultiAdapter(Map<Class, Class> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
         this.listItems = listItems;
-        this.viewClass = viewClass;
+        this.itemViewMapping = itemViewMapping;
         this.builder = builder;
+        this.itemClassArray = new ArrayList<Class>(itemViewMapping.keySet());
     }
 
-    public void setItems(List<T> items) {
+    public void setItems(List items) {
         ThreadHelper.crashIfBackgroundThread();
         listItems = items;
         notifyDataSetChanged();
     }
 
-    public void addItem(T item) {
+    public void addItem(Object item) {
         ThreadHelper.crashIfBackgroundThread();
         listItems.add(item);
         notifyDataSetChanged();
     }
 
-    public void delItem(T item) {
+    public void delItem(Object item) {
         ThreadHelper.crashIfBackgroundThread();
         listItems.remove(item);
         notifyDataSetChanged();
     }
 
-    public void addItems(List<T> items) {
+    public void addItems(List items) {
         ThreadHelper.crashIfBackgroundThread();
         listItems.addAll(items);
         notifyDataSetChanged();
@@ -63,18 +67,33 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
         notifyDataSetChanged();
     }
 
-    public ViewEventListener<T> getViewEventListener() {
+    public ViewEventListener getViewEventListener() {
         return viewEventListener;
     }
 
-    public void setViewEventListener(ViewEventListener<T> viewEventListener) {
+    public void setViewEventListener(ViewEventListener viewEventListener) {
         this.viewEventListener = viewEventListener;
     }
 
-    public void notifyAction(int actionId, T object, View view) {
+    public void notifyAction(int actionId, Object object, View view) {
         if (viewEventListener != null) {
             viewEventListener.onViewEvent(actionId, object, view);
         }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (listItems == null) {
+            return 0;
+        }
+        Object object = getItem(position);
+        Class itemClass = itemViewMapping.get(object.getClass());
+        return itemViewMapping == null ? 0 : itemClassArray.indexOf(itemClass);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return itemViewMapping == null ? 0 : itemViewMapping.size();
     }
 
     @Override
@@ -83,7 +102,7 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
     }
 
     @Override
-    public T getItem(int position) {
+    public Object getItem(int position) {
         return listItems == null ? null : listItems.get(position);
     }
 
@@ -94,7 +113,7 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        BindableLayout<T> viewGroup = (BindableLayout<T>) convertView;
+        BindableLayout viewGroup = (BindableLayout) convertView;
         if (viewGroup == null) {
             viewGroup = builder.build(parent.getContext(), getItem(position));
         }
@@ -106,13 +125,14 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
         return viewGroup;
     }
 
-    private static <T, Q extends BindableLayout<T>> BindableLayoutBuilder<T, Q> createDefaultBuilder(final Class viewClass) {
-        return new BindableLayoutBuilder<T, Q>() {
+    private static BindableLayoutBuilder createDefaultBuilder(final Map<Class, Class> itemViewMapping) {
+        return new BindableLayoutBuilder() {
             @Override
-            public Q build(Context context, T item) {
+            public BindableLayout build(Context context, Object item) {
                 try {
+                    Class viewClass = itemViewMapping.get(item.getClass());
                     Constructor constructor = viewClass.getConstructor(Context.class);
-                    return (Q) constructor.newInstance(context);
+                    return (BindableLayout) constructor.newInstance(context);
                 } catch (Exception e) {
                     throw new RuntimeException("Something went wrong creating the views", e);
                 }

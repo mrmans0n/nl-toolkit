@@ -1,7 +1,7 @@
 nl-toolkit
 ==========
 
-This is a helper library for my projects. It is not ready for production (for the time being). It is also not documented at this time. Just ignore it.
+This is a helper library for my projects, containing some misc / convenience classes I usually use in personal stuff for developing faster.
 
 Getting Started
 ---------------
@@ -9,28 +9,47 @@ Getting Started
 You can add the project with maven or gradle via adding the appropiate dependence.
 
 ```groovy
-compile 'io.nlopez.toolkit:library:1.+'
+compile 'io.nlopez.toolkit:library:1.0.0-SNAPSHOT'
 ```
 
-(Still not on Maven Central, as I haven't developed what I want to do yet XD)
+It's not in Central yet, just in its snapshot repositories.
 
 Adapters
 --------
 
-### SingleViewTypeAdapter
+### SingleAdapter
 
 Adapter that leverages all the work that needs to be done for a list with only one type of cells in display.
 
 Example (taken from Sample app):
 
 ```java
-SingleViewTypeAdapter<TextAndImageItem, TextAndImageItemView> adapter = new SingleViewTypeAdapter<TextAndImageItem, TextAndImageItemView>(TextAndImageItemView.class, items);
+SingleAdapter<TextAndImageItem, TextAndImageItemView> adapter = new SingleAdapter<TextAndImageItem, TextAndImageItemView>(TextAndImageItemView.class, items);
 listView.setAdapter(adapter);
 ```
 
-### AASingleViewTypeAdapter
+### AASingleAdapter
 
-Same as SingleViewTypeAdapter, but for Android Annotations annotated classes (with @EViewGroup).
+Same as SingleAdapter, but for Android Annotations annotated classes (with @EViewGroup).
+
+### MultiAdapter
+
+The multi-view type alternative to SingleAdapter. We have to provide it with a map of Object classes to its View classes.
+
+Example (taken from Sample app):
+
+```java
+Map<Class, Class> mapping = new HashMap<Class, Class>();
+mapping.put(TextAndImageItem.class, TextAndImageItemView.class);
+mapping.put(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
+
+MultiAdapter adapter = new MultiAdapter(mapping, items);
+listView.setAdapter(adapter);
+```
+
+### AAMultiAdapter
+
+Same as MultiViewTypeAdapter, but for Android Annotations annotated classes (with @EViewGroup).
 
 License
 -------

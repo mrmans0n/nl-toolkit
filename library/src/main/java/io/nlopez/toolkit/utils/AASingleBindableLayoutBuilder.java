@@ -9,11 +9,11 @@ import io.nlopez.toolkit.views.BindableLayout;
 /**
  * Created by mrm on 18/05/14.
  */
-public class AABindableLayoutBuilder<T, Q extends BindableLayout<T>> implements BindableLayoutBuilder<T, Q> {
+public class AASingleBindableLayoutBuilder<T, Q extends BindableLayout<T>> implements BindableLayoutBuilder<T, Q> {
 
     private Class viewClass;
 
-    public AABindableLayoutBuilder(Class viewClass) {
+    public AASingleBindableLayoutBuilder(Class viewClass) {
         this.viewClass = viewClass;
     }
 
