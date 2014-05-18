@@ -6,9 +6,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import io.nlopez.toolkit.utils.BindableLayoutBuilder;
 import io.nlopez.toolkit.utils.ThreadHelper;
 import io.nlopez.toolkit.utils.ViewEventListener;
 import io.nlopez.toolkit.views.BindableLayout;
@@ -21,10 +21,16 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
     protected Class viewClass;
     protected List<T> listItems;
     protected ViewEventListener<T> viewEventListener;
+    protected BindableLayoutBuilder<T, Q> builder;
 
     public SingleViewTypeAdapter(Class<Q> viewClass, List<T> listItems) {
+        this(viewClass, listItems, SingleViewTypeAdapter.<T, Q>createDefaultBuilder(viewClass));
+    }
+
+    public SingleViewTypeAdapter(Class<Q> viewClass, List<T> listItems, BindableLayoutBuilder<T, Q> builder) {
         this.listItems = listItems;
         this.viewClass = viewClass;
+        this.builder = builder;
     }
 
     public void setItems(List<T> items) {
@@ -90,18 +96,7 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
     public View getView(int position, View convertView, ViewGroup parent) {
         BindableLayout<T> viewGroup = (BindableLayout<T>) convertView;
         if (viewGroup == null) {
-            try {
-                Constructor constructor = viewClass.getConstructor(Context.class);
-                viewGroup = (BindableLayout<T>) constructor.newInstance(parent.getContext());
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            }
+            viewGroup = builder.build(parent.getContext(), getItem(position), position);
         }
 
         if (viewGroup != null) {
@@ -109,5 +104,19 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
             viewGroup.bind(getItem(position), position);
         }
         return viewGroup;
+    }
+
+    private static <T, Q extends BindableLayout<T>> BindableLayoutBuilder<T, Q> createDefaultBuilder(final Class viewClass) {
+        return new BindableLayoutBuilder<T, Q>() {
+            @Override
+            public Q build(Context context, T item, int position) {
+                try {
+                    Constructor constructor = viewClass.getConstructor(Context.class);
+                    return (Q) constructor.newInstance(context);
+                } catch (Exception e) {
+                    throw new RuntimeException("Something went wrong creating the views", e);
+                }
+            }
+        };
     }
 }

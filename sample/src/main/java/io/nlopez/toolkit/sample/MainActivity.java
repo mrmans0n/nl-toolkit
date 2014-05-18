@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
         }
 
         SingleViewTypeAdapter<TextAndImageItem, TextAndImageItemView> adapter = new SingleViewTypeAdapter<TextAndImageItem, TextAndImageItemView>(TextAndImageItemView.class, items);
+
         adapter.setViewEventListener(new ViewEventListener<TextAndImageItem>() {
             @Override
             public void onViewEvent(int actionId, TextAndImageItem item, View view) {

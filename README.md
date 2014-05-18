@@ -14,6 +14,12 @@ compile 'io.nlopez.toolkit:library:1.+'
 
 (Still not on Maven Central, as I haven't developed what I want to do yet XD)
 
+Adapters
+--------
+
+### SingleViewTypeAdapter
+
+
 License
 -------
 
