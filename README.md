@@ -12,12 +12,14 @@ You can add the project with maven or gradle via adding the appropiate dependenc
 compile 'io.nlopez.toolkit:library:1.+'
 ```
 
+(Still not on Maven Central, as I haven't developed what I want to do yet XD)
+
 License
 -------
 
 The MIT License (MIT)
 
-Copyright (c) 2013 Nacho Lopez
+Copyright (c) 2014 Nacho Lopez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
