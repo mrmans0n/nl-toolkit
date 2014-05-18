@@ -1,0 +1,46 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+gradle.properties
+
+# Eclipse project files
+.classpath
+.project
+
+# Maven files
+target/
+
+# Android annotations
+aa-gen/
+aa-test/
+
+# IntelliJ IDEA
+.idea/
+*/.idea/
+*.iml
+*/gen-gen-external-apklibs/
+*/gen-external-apklibs/
+library/gen-external-apklibs/
+library/target/
+sample/gen-external-apklibs/
+sample/target/
+library/build/
+sample/build/
+out/
+.gradle/
+
+# Apple crap
+.DS_Store
