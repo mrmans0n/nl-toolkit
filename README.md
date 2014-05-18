@@ -19,6 +19,18 @@ Adapters
 
 ### SingleViewTypeAdapter
 
+Adapter that leverages all the work that needs to be done for a list with only one type of cells in display.
+
+Example (taken from Sample app):
+
+```java
+SingleViewTypeAdapter<TextAndImageItem, TextAndImageItemView> adapter = new SingleViewTypeAdapter<TextAndImageItem, TextAndImageItemView>(TextAndImageItemView.class, items);
+listView.setAdapter(adapter);
+```
+
+### AASingleViewTypeAdapter
+
+Same as SingleViewTypeAdapter, but for Android Annotations annotated classes (with @EViewGroup).
 
 License
 -------

@@ -96,7 +96,7 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
     public View getView(int position, View convertView, ViewGroup parent) {
         BindableLayout<T> viewGroup = (BindableLayout<T>) convertView;
         if (viewGroup == null) {
-            viewGroup = builder.build(parent.getContext(), getItem(position), position);
+            viewGroup = builder.build(parent.getContext(), getItem(position));
         }
 
         if (viewGroup != null) {
@@ -109,7 +109,7 @@ public class SingleViewTypeAdapter<T, Q extends BindableLayout<T>> extends BaseA
     private static <T, Q extends BindableLayout<T>> BindableLayoutBuilder<T, Q> createDefaultBuilder(final Class viewClass) {
         return new BindableLayoutBuilder<T, Q>() {
             @Override
-            public Q build(Context context, T item, int position) {
+            public Q build(Context context, T item) {
                 try {
                     Constructor constructor = viewClass.getConstructor(Context.class);
                     return (Q) constructor.newInstance(context);

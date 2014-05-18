@@ -18,7 +18,7 @@ public class AABindableLayoutBuilder<T, Q extends BindableLayout<T>> implements 
     }
 
     @Override
-    public Q build(Context context, T item, int position) {
+    public Q build(Context context, T item) {
         try {
             Method method = viewClass.getMethod("build", Context.class);
             return (Q) method.invoke(null, context);
