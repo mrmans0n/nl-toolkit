@@ -50,7 +50,7 @@ listView.setAdapter(adapter);
 
 ### AAMultiAdapter
 
-Same as MultiViewTypeAdapter, but for Android Annotations annotated classes (with @EViewGroup).
+Same as MultiAdapter, but for Android Annotations annotated classes (with @EViewGroup).
 
 License
 -------
