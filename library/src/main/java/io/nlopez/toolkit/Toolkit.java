@@ -11,6 +11,13 @@ import java.util.List;
  */
 public class Toolkit {
 
+    public static final String PREFERENCES_FILE = "toolkit_prefs";
+
+
+    private Toolkit() {
+
+    }
+
     public static void main(String[] args) {
         System.out.println("Does nothing :)");
     }

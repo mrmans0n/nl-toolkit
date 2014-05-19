@@ -10,7 +10,7 @@ import io.nlopez.toolkit.BuildConfig;
 public class ThreadHelper {
 
     /**
-     * Provoke an exception if we are not in the main thread
+     * Provoke an exception if we are in the main thread
      */
     public static void crashIfMainThread() {
         if (BuildConfig.DEBUG) {
@@ -21,7 +21,7 @@ public class ThreadHelper {
     }
 
     /**
-     * Provoke an exception if we are not in a background thread
+     * Provoke an exception if we are in a background thread
      */
     public static void crashIfBackgroundThread() {
         if (BuildConfig.DEBUG) {
