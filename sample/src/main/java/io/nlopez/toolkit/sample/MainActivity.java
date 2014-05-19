@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.nlopez.toolkit.adapters.Adapters;
 import io.nlopez.toolkit.adapters.MultiAdapter;
 import io.nlopez.toolkit.adapters.SingleAdapter;
 import io.nlopez.toolkit.sample.model.TextAndImageItem;
@@ -60,7 +61,7 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
             items.add(new TextAndImageItem("Item #" + i, R.drawable.ic_launcher));
         }
 
-        SingleAdapter<TextAndImageItem, TextAndImageItemView> adapter = new SingleAdapter<TextAndImageItem, TextAndImageItemView>(TextAndImageItemView.class, items);
+        SingleAdapter<TextAndImageItem, TextAndImageItemView> adapter = Adapters.newSingleAdapter(TextAndImageItemView.class, items);
 
         adapter.setViewEventListener(this);
 
@@ -81,7 +82,7 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
         mapping.put(TextAndImageItem.class, TextAndImageItemView.class);
         mapping.put(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
 
-        MultiAdapter adapter = new MultiAdapter(mapping, items);
+        MultiAdapter adapter = Adapters.newMultiAdapter(mapping, items);
         adapter.setViewEventListener(this);
 
         listView.setAdapter(adapter);

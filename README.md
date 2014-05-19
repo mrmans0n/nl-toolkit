@@ -1,7 +1,7 @@
 nl-toolkit
 ==========
 
-This is a helper library for my projects, containing some misc / convenience classes I usually use in personal stuff for developing faster.
+This is a helper library for my projects, containing some misc / convenience classes I usually use in personal stuff. 
 
 Getting Started
 ---------------
@@ -24,7 +24,7 @@ Adapter that leverages all the work that needs to be done for a list with only o
 Example (taken from Sample app):
 
 ```java
-SingleAdapter<TextAndImageItem, TextAndImageItemView> adapter = new SingleAdapter<TextAndImageItem, TextAndImageItemView>(TextAndImageItemView.class, items);
+SingleAdapter<TextAndImageItem, TextAndImageItemView> adapter = Adapters.newSingleAdapter(TextAndImageItemView.class, items);
 listView.setAdapter(adapter);
 ```
 
@@ -43,7 +43,7 @@ Map<Class, Class<? extends BindableLayout>> mapping = new HashMap<Class, Class<?
 mapping.put(TextAndImageItem.class, TextAndImageItemView.class);
 mapping.put(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
 
-MultiAdapter adapter = new MultiAdapter(mapping, items);
+MultiAdapter adapter = Adapters.newMultiAdapter(mapping, items);
 listView.setAdapter(adapter);
 ```
 
