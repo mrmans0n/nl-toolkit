@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.nlopez.toolkit.adapters.Adapters;
+import io.nlopez.toolkit.adapters.Mapper;
 import io.nlopez.toolkit.adapters.MultiAdapter;
 import io.nlopez.toolkit.adapters.SingleAdapter;
 import io.nlopez.toolkit.sample.model.TextAndImageItem;
@@ -78,11 +79,12 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
             }
         }
 
-        Map<Class, Class<? extends BindableLayout>> mapping = new HashMap<Class, Class<? extends BindableLayout>>();
-        mapping.put(TextAndImageItem.class, TextAndImageItemView.class);
-        mapping.put(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
+        Map<Class, Class<? extends BindableLayout>> map = new Mapper()
+                .add(TextAndImageItem.class, TextAndImageItemView.class)
+                .add(TextImageAndButtonItem.class, TextImageAndButtonItemView.class)
+                .asMap();
 
-        MultiAdapter adapter = Adapters.newMultiAdapter(mapping, items);
+        MultiAdapter adapter = Adapters.newMultiAdapter(map, items);
         adapter.setViewEventListener(this);
 
         listView.setAdapter(adapter);

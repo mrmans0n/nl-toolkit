@@ -39,9 +39,10 @@ The multi-view type alternative to SingleAdapter. We have to provide it with a m
 Example (taken from Sample app):
 
 ```java
-Map<Class, Class<? extends BindableLayout>> mapping = new HashMap<Class, Class<? extends BindableLayout>>();
-mapping.put(TextAndImageItem.class, TextAndImageItemView.class);
-mapping.put(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
+Map<Class, Class<? extends BindableLayout>> map = new Mapper()
+  .add(TextAndImageItem.class, TextAndImageItemView.class)
+  .add(TextImageAndButtonItem.class, TextImageAndButtonItemView.class)
+  .asMap();
 
 MultiAdapter adapter = Adapters.newMultiAdapter(mapping, items);
 listView.setAdapter(adapter);
