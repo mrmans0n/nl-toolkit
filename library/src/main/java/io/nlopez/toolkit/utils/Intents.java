@@ -35,4 +35,11 @@ public class Intents {
         return shareIntent;
     }
 
+    private static Intent newOpenUrlIntent(String url) {
+        Intent urlIntent = new Intent();
+        urlIntent.setAction(Intent.ACTION_VIEW);
+        urlIntent.setData(Uri.parse(url));
+        return urlIntent;
+    }
+
 }
