@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/mrm/Documents/workspace/nl-toolkit/sample/build/intermediates/pre-dexed/debug/classes-45102662d1fc58755d8e606313afe9db6d4f8e1f.jar"
+        jar="/Users/mrm/Documents/workspace/nl-toolkit/build/intermediates/exploded-aar/com.google.android.gms/play-services/4.4.52/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3dfdf1db5ce5ea2999a5dcde8c8e650b02660059"/>
+    <item
+        dex="/Users/mrm/Documents/workspace/nl-toolkit/sample/build/intermediates/pre-dexed/debug/support-v4-19.0.1-cbedd3f4568c83fa4bf7c2c73a1d5d837414d9a1.jar"
+        jar="/Users/mrm/Documents/android-sdk/extras/android/m2repository/com/android/support/support-v4/19.0.1/support-v4-19.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd"/>
+    <item
+        dex="/Users/mrm/Documents/workspace/nl-toolkit/sample/build/intermediates/pre-dexed/debug/classes-d9a79015030708f50987ee27cc707ea143c50ff0.jar"
+        jar="/Users/mrm/Documents/workspace/nl-toolkit/build/intermediates/exploded-aar/io.nlopez.toolkit/library/1.0.0-SNAPSHOT/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3c5e20328ec7fa16e16a29fd8fd43d448f14d3e8"/>
+
+</pre-dex-items>
