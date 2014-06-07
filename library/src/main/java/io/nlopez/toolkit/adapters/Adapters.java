@@ -31,15 +31,30 @@ public class Adapters {
         return new MultiAdapter(itemViewMapping, listItems);
     }
 
+    public static MultiAdapter newMultiAdapter(Mapper mapper, List listItems) {
+        return new MultiAdapter(mapper, listItems);
+    }
+
     public static MultiAdapter newMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
         return new MultiAdapter(itemViewMapping, listItems, builder);
     }
+
+    public static MultiAdapter newMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+        return new MultiAdapter(mapper, listItems, builder);
 
     public static AAMultiAdapter newAAMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
         return new AAMultiAdapter(itemViewMapping, listItems);
     }
 
+    public static AAMultiAdapter newAAMultiAdapter(Mapper mapper, List listItems) {
+        return new AAMultiAdapter(mapper, listItems);
+    }
+
     public static AAMultiAdapter newAAMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
         return new AAMultiAdapter(itemViewMapping, listItems, builder);
+    }
+
+    public static AAMultiAdapter newAAMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+        return new AAMultiAdapter(mapper, listItems, builder);
     }
 }
