@@ -44,10 +44,19 @@ public abstract class BindableLayout<T> extends LinearLayout {
         this.viewEventListener = viewEventListener;
     }
 
-    public void notifyItemAction(int actionId, View view) {
+
+    public void notifyItemAction(int actionId, T theItem, View view) {
         if (viewEventListener != null) {
-            viewEventListener.onViewEvent(actionId, item, view);
+            viewEventListener.onViewEvent(actionId, theItem, view);
         }
+    }
+
+    public void notifyItemAction(int actionId, View view) {
+        notifyItemAction(actionId, item, view);
+    }
+
+    public void notifyItemAction(int actionId) {
+        notifyItemAction(actionId, item, this);
     }
 
     public T getItem() {
