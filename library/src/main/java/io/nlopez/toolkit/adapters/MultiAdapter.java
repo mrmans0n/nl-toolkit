@@ -37,6 +37,10 @@ public class MultiAdapter extends BaseAdapter {
         this.itemClassArray = new ArrayList<Class>(itemViewMapping.keySet());
     }
 
+    public MultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+        this(mapper.asMap(), listItems, builder);
+    }
+
     public void setItems(List items) {
         ThreadHelper.crashIfBackgroundThread();
         listItems = items;

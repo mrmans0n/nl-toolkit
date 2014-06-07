@@ -19,4 +19,8 @@ public class AAMultiAdapter extends MultiAdapter {
     public AAMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
         super(itemViewMapping, listItems, builder);
     }
+
+    public AAMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+        super(mapper, listItems, builder);
+    }
 }
