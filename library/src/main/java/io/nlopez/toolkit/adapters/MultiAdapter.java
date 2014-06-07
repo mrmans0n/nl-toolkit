@@ -30,6 +30,10 @@ public class MultiAdapter extends BaseAdapter {
         this(itemViewMapping, listItems, createDefaultBuilder(itemViewMapping));
     }
 
+    public MultiAdapter(Mapper mapper, List listItems) {
+        this(mapper.asMap(), listItems);
+    }
+
     public MultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
         this.listItems = listItems;
         this.itemViewMapping = itemViewMapping;
