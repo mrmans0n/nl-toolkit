@@ -1,11 +1,5 @@
 package io.nlopez.toolkit;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Nacho Lopez on 28/10/13.
  */

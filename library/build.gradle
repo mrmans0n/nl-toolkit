@@ -17,7 +17,7 @@ version '1.0.0-SNAPSHOT'
 group 'io.nlopez.toolkit'
 
 dependencies {
-    compile 'com.google.android.gms:play-services:4.+'
+    // None atm.
 }
 
 android {
