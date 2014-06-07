@@ -41,6 +41,7 @@ public class Adapters {
 
     public static MultiAdapter newMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
         return new MultiAdapter(mapper, listItems, builder);
+    }
 
     public static AAMultiAdapter newAAMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
         return new AAMultiAdapter(itemViewMapping, listItems);
