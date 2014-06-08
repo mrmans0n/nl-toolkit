@@ -29,7 +29,7 @@ public class DeviceIdentifier {
         return new DeviceIdentifier(context);
     }
 
-    public DeviceIdentifier storeKey(String storeKey) {
+    public DeviceIdentifier storeWithKey(String storeKey) {
         this.storeKey = storeKey;
         return this;
     }
