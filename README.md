@@ -39,7 +39,7 @@ The multi-view type alternative to SingleAdapter. We have to provide it with a m
 Example (taken from Sample app):
 
 ```java
-Map<Class, Class<? extends BindableLayout>> map = new Mapper()
+Map<Class, Class<? extends BindableLayout>> mapping = new Mapper()
   .add(TextAndImageItem.class, TextAndImageItemView.class)
   .add(TextImageAndButtonItem.class, TextImageAndButtonItemView.class)
   .asMap();
