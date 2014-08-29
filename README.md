@@ -1,7 +1,7 @@
 nl-toolkit
 ==========
 
-This is a helper library for my projects, containing some misc / convenience classes I usually use in personal stuff. 
+This is a helper library for my projects, containing some misc / convenience classes I usually use in my stuff.
 
 Getting Started
 ---------------
@@ -51,6 +51,34 @@ listView.setAdapter(adapter);
 ### AAMultiAdapter
 
 Same as MultiAdapter, but for Android Annotations annotated classes (with @EViewGroup).
+
+Intents
+-------
+
+There are a couple of typical intent creators in the Intents class, such as:
+
+* Share text
+* Share binary
+* Open URL
+* Send email
+* Open dialer with phone number
+* Open navigator to coordinates
+* Take picture with the camera
+* Open gallery
+
+Miscellaneous
+-------------
+
+There is some more stuff bundled in here:
+
+* DeviceIdentifier class, in where you could either use the typical ANDROID_ID approach or the per-installation UUID generation.
+* ThreadHelper, with crash enforcers for background thread / main thread so we can build upon fail fast strategies.
+* MenuFragmentEntry, the typical model for using as row in a left drawer menu ListView.
+
+Future
+------
+
+If this little library begins to grow, I will most definitely break it up into smaller packages.
 
 License
 -------

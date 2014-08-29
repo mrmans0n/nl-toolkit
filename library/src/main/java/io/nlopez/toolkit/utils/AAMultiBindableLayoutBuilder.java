@@ -12,7 +12,7 @@ import io.nlopez.toolkit.views.BindableLayout;
  */
 public class AAMultiBindableLayoutBuilder implements BindableLayoutBuilder {
 
-    private Map<Class, Class<? extends BindableLayout>> itemViewMapping;
+    protected Map<Class, Class<? extends BindableLayout>> itemViewMapping;
 
     public AAMultiBindableLayoutBuilder(Map<Class, Class<? extends BindableLayout>> itemViewMapping) {
         this.itemViewMapping = itemViewMapping;

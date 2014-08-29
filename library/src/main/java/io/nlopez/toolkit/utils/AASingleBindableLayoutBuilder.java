@@ -11,7 +11,7 @@ import io.nlopez.toolkit.views.BindableLayout;
  */
 public class AASingleBindableLayoutBuilder<T, Q extends BindableLayout<T>> implements BindableLayoutBuilder<T, Q> {
 
-    private Class viewClass;
+    protected Class viewClass;
 
     public AASingleBindableLayoutBuilder(Class viewClass) {
         this.viewClass = viewClass;
