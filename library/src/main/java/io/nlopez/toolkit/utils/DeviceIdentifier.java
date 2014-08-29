@@ -66,7 +66,7 @@ public class DeviceIdentifier {
                 throw new RuntimeException(e);
 
             }
-            prefs.edit().putString(storeKey, uuid.toString()).commit();
+            prefs.edit().putString(storeKey, uuid.toString()).apply();
         }
 
         return uuid.toString();
@@ -87,7 +87,7 @@ public class DeviceIdentifier {
             uuid = UUID.fromString(id);
         } else {
             uuid = UUID.randomUUID();
-            prefs.edit().putString(storeKey, uuid.toString()).commit();
+            prefs.edit().putString(storeKey, uuid.toString()).apply();
         }
 
         return uuid.toString();
