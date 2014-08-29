@@ -12,8 +12,6 @@ You can add the project with maven or gradle via adding the appropiate dependenc
 compile 'io.nlopez.toolkit:library:1.0.0'
 ```
 
-It's not in Central yet, just in its snapshot repositories.
-
 Adapters
 --------
 
