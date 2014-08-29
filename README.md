@@ -9,7 +9,7 @@ Getting Started
 You can add the project with maven or gradle via adding the appropiate dependence.
 
 ```groovy
-compile 'io.nlopez.toolkit:library:1.0.0-SNAPSHOT'
+compile 'io.nlopez.toolkit:library:1.0.0'
 ```
 
 It's not in Central yet, just in its snapshot repositories.
