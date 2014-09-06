@@ -2,7 +2,6 @@ package io.nlopez.toolkit.adapters;
 
 import java.util.List;
 
-import io.nlopez.toolkit.utils.AASingleBindableLayoutBuilder;
 import io.nlopez.toolkit.utils.BindableLayoutBuilder;
 import io.nlopez.toolkit.views.BindableLayout;
 

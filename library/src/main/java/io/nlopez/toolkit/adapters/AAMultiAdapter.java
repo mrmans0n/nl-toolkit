@@ -3,7 +3,6 @@ package io.nlopez.toolkit.adapters;
 import java.util.List;
 import java.util.Map;
 
-import io.nlopez.toolkit.utils.AAMultiBindableLayoutBuilder;
 import io.nlopez.toolkit.utils.BindableLayoutBuilder;
 import io.nlopez.toolkit.views.BindableLayout;
 

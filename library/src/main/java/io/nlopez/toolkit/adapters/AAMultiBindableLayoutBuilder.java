@@ -1,10 +1,11 @@
-package io.nlopez.toolkit.utils;
+package io.nlopez.toolkit.adapters;
 
 import android.content.Context;
 
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import io.nlopez.toolkit.utils.BindableLayoutBuilder;
 import io.nlopez.toolkit.views.BindableLayout;
 
 /**

@@ -72,6 +72,7 @@ There is some more stuff bundled in here:
 * DeviceIdentifier class, in where you could either use the typical ANDROID_ID approach or the per-installation UUID generation.
 * ThreadHelper, with crash enforcers for background thread / main thread so we can build upon fail fast strategies.
 * MenuFragmentEntry, the typical model for using as row in a left drawer menu ListView.
+* ActivityTransitions, for being able to easily use custom animations between activities. It comes with a default slide-left animation.
 
 Future
 ------
