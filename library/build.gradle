@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.android.tools.build:gradle:0.13.0'
     }
 }
 
@@ -13,7 +13,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 
-version '1.0.1-SNAPSHOT'
+version '1.0.1'
 group 'io.nlopez.toolkit'
 
 dependencies {
