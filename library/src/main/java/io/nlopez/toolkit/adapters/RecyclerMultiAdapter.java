@@ -1,24 +1,24 @@
 package io.nlopez.toolkit.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import io.nlopez.toolkit.utils.BindableLayoutBuilder;
+import io.nlopez.toolkit.utils.ThreadHelper;
+import io.nlopez.toolkit.utils.ViewEventListener;
+import io.nlopez.toolkit.views.BindableLayout;
+import io.nlopez.toolkit.views.BindableViewHolder;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import io.nlopez.toolkit.utils.BindableLayoutBuilder;
-import io.nlopez.toolkit.utils.ThreadHelper;
-import io.nlopez.toolkit.utils.ViewEventListener;
-import io.nlopez.toolkit.views.BindableLayout;
-
 /**
- * Created by mrm on 18/05/14.
+ * Created by mrm on 27/02/15.
  */
-public class MultiAdapter extends BaseAdapter {
+public class RecyclerMultiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     protected Map<Class, Class<? extends BindableLayout>> itemViewMapping;
     protected List<Class> itemClassArray;
@@ -26,22 +26,23 @@ public class MultiAdapter extends BaseAdapter {
     protected ViewEventListener viewEventListener;
     protected BindableLayoutBuilder builder;
 
-    public MultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
+    public RecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
         this(itemViewMapping, listItems, createDefaultBuilder(itemViewMapping));
     }
 
-    public MultiAdapter(Mapper mapper, List listItems) {
+    public RecyclerMultiAdapter(Mapper mapper, List listItems) {
         this(mapper.asMap(), listItems);
     }
 
-    public MultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
+    public RecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems,
+                                BindableLayoutBuilder builder) {
         this.listItems = listItems;
         this.itemViewMapping = itemViewMapping;
         this.builder = builder;
         this.itemClassArray = new ArrayList<Class>(itemViewMapping.keySet());
     }
 
-    public MultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+    public RecyclerMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
         this(mapper.asMap(), listItems, builder);
     }
 
@@ -90,27 +91,35 @@ public class MultiAdapter extends BaseAdapter {
     }
 
     @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        BindableLayout viewGroup = builder.build(parent.getContext(), itemClassArray.get(viewType), null);
+        return new BindableViewHolder(viewGroup);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        BindableViewHolder bindableViewHolder = (BindableViewHolder) holder;
+        bindableViewHolder.setViewEventListener(viewEventListener);
+        Object item = getItem(position);
+        if (item != null) {
+            bindableViewHolder.bind(item, position);
+        }
+    }
+
+    @Override
     public int getItemViewType(int position) {
         if (listItems == null) {
             return 0;
         }
         Object object = getItem(position);
-        Class itemClass = itemViewMapping.get(object.getClass());
-        return itemViewMapping == null ? 0 : itemClassArray.indexOf(itemClass);
+        int itemClassIndex = itemClassArray.indexOf(object.getClass());
+        if (itemClassIndex == -1) {
+            throw new RuntimeException("Object "+object.getClass().getCanonicalName()+" doesn't have an associated mapping");
+        }
+        return itemClassIndex;
     }
 
-    @Override
-    public int getViewTypeCount() {
-        return itemViewMapping == null ? 0 : itemViewMapping.size();
-    }
-
-    @Override
-    public int getCount() {
-        return listItems == null ? 0 : listItems.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
+    private Object getItem(int position) {
         return listItems == null ? null : listItems.get(position);
     }
 
@@ -120,25 +129,18 @@ public class MultiAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        BindableLayout viewGroup = (BindableLayout) convertView;
-        if (viewGroup == null) {
-            viewGroup = builder.build(parent.getContext(), getItem(position).getClass(), getItem(position));
-        }
-
-        if (viewGroup != null) {
-            viewGroup.setViewEventListener(viewEventListener);
-            viewGroup.bind(getItem(position), position);
-        }
-        return viewGroup;
+    public int getItemCount() {
+        return listItems == null ? 0 : listItems.size();
     }
 
-    private static BindableLayoutBuilder createDefaultBuilder(final Map<Class, Class<? extends BindableLayout>> itemViewMapping) {
+    private static BindableLayoutBuilder createDefaultBuilder(
+            final Map<Class, Class<? extends BindableLayout>> itemViewMapping) {
         return new BindableLayoutBuilder() {
             @Override
             public BindableLayout build(Context context, Class aClass, Object item) {
                 try {
-                    Class viewClass = itemViewMapping.get(aClass);
+                    Class modelClass = (item == null) ? aClass : item.getClass();
+                    Class viewClass = itemViewMapping.get(modelClass);
                     Constructor constructor = viewClass.getConstructor(Context.class);
                     return (BindableLayout) constructor.newInstance(context);
                 } catch (Exception e) {

@@ -3,5 +3,7 @@
     <string-array name="navigation_list">
         <item>SingleAdapter example</item>
         <item>MultiAdapter example</item>
+        <item>RecyclerSingleAdapter example</item>
+        <item>RecyclerMultiAdapter example</item>
     </string-array>
 </resources>

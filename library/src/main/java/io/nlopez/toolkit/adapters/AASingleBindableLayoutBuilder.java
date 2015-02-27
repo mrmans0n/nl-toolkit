@@ -19,7 +19,7 @@ public class AASingleBindableLayoutBuilder<T, Q extends BindableLayout<T>> imple
     }
 
     @Override
-    public Q build(Context context, T item) {
+    public Q build(Context context, Class aClass, T item) {
         try {
             Method method = viewClass.getMethod("build", Context.class);
             return (Q) method.invoke(null, context);

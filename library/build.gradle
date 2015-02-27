@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+        classpath 'com.android.tools.build:gradle:1.1.0'
     }
 }
 
@@ -13,21 +13,22 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 
-version '1.0.1'
+version '1.0.2'
 group 'io.nlopez.toolkit'
 
 dependencies {
-    compile 'com.android.support:support-v13:20.0.0'
+    compile 'com.android.support:support-v13:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
 }
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
 
     buildTypes {
         defaultConfig {
-            minSdkVersion 11
-            targetSdkVersion 20
+            minSdkVersion 14
+            targetSdkVersion 21
             versionCode 10000
             versionName version
         }

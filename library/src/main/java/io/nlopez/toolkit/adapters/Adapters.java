@@ -11,6 +11,8 @@ import io.nlopez.toolkit.views.BindableLayout;
  */
 public class Adapters {
 
+    // SingleAdapters
+
     public static <T, Q extends BindableLayout<T>> SingleAdapter<T, Q> newSingleAdapter(Class viewClass, List listItems) {
         return new SingleAdapter<T, Q>(viewClass, listItems);
     }
@@ -23,9 +25,29 @@ public class Adapters {
         return new AASingleAdapter<T, Q>(viewClass, listItems);
     }
 
-    public static <T, Q extends BindableLayout<T>> SingleAdapter<T, Q> newAASingleAdapter(Class viewClass, List listItems, BindableLayoutBuilder<T, Q> builder) {
-        return new SingleAdapter<T, Q>(viewClass, listItems, builder);
+    public static <T, Q extends BindableLayout<T>> AASingleAdapter<T, Q> newAASingleAdapter(Class viewClass, List listItems, BindableLayoutBuilder<T, Q> builder) {
+        return new AASingleAdapter<T, Q>(viewClass, listItems, builder);
     }
+
+    // RecyclerSingleAdapters
+
+    public static <T, Q extends BindableLayout<T>> RecyclerSingleAdapter<T, Q> newRecyclerSingleAdapter(Class viewClass, List listItems) {
+        return new RecyclerSingleAdapter<T, Q>(viewClass, listItems);
+    }
+
+    public static <T, Q extends BindableLayout<T>> RecyclerSingleAdapter<T, Q> newRecyclerSingleAdapter(Class viewClass, List listItems, BindableLayoutBuilder<T, Q> builder) {
+        return new RecyclerSingleAdapter<T, Q>(viewClass, listItems, builder);
+    }
+
+    public static <T, Q extends BindableLayout<T>> AARecyclerSingleAdapter<T, Q> newAARecyclerSingleAdapter(Class viewClass, List listItems) {
+        return new AARecyclerSingleAdapter<T, Q>(viewClass, listItems);
+    }
+
+    public static <T, Q extends BindableLayout<T>> AARecyclerSingleAdapter<T, Q> newAARecyclerSingleAdapter(Class viewClass, List listItems, BindableLayoutBuilder<T, Q> builder) {
+        return new AARecyclerSingleAdapter<T, Q>(viewClass, listItems, builder);
+    }
+
+    // MultiAdapters
 
     public static MultiAdapter newMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
         return new MultiAdapter(itemViewMapping, listItems);
@@ -57,5 +79,39 @@ public class Adapters {
 
     public static AAMultiAdapter newAAMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
         return new AAMultiAdapter(mapper, listItems, builder);
+    }
+
+    // RecyclerMultiAdapters
+
+    public static RecyclerMultiAdapter newRecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
+        return new RecyclerMultiAdapter(itemViewMapping, listItems);
+    }
+
+    public static RecyclerMultiAdapter newRecyclerMultiAdapter(Mapper mapper, List listItems) {
+        return new RecyclerMultiAdapter(mapper, listItems);
+    }
+
+    public static RecyclerMultiAdapter newRecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
+        return new RecyclerMultiAdapter(itemViewMapping, listItems, builder);
+    }
+
+    public static RecyclerMultiAdapter newRecyclerMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+        return new RecyclerMultiAdapter(mapper, listItems, builder);
+    }
+
+    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
+        return new RecyclerMultiAdapter(itemViewMapping, listItems);
+    }
+
+    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Mapper mapper, List listItems) {
+        return new RecyclerMultiAdapter(mapper, listItems);
+    }
+
+    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
+        return new RecyclerMultiAdapter(itemViewMapping, listItems, builder);
+    }
+
+    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+        return new RecyclerMultiAdapter(mapper, listItems, builder);
     }
 }

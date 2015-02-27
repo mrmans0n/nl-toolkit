@@ -50,6 +50,10 @@ listView.setAdapter(adapter);
 
 Same as MultiAdapter, but for Android Annotations annotated classes (with @EViewGroup).
 
+### RecyclerSingleAdapter, RecyclerMultiAdapter, AARecyclerSingleAdapter, AARecyclerMultiAdapter
+
+They have exactly the same parameters as their counterparts but they work with RecyclerView instead of an AbsListView inherited class.
+
 Intents
 -------
 
@@ -84,7 +88,7 @@ License
 
 The MIT License (MIT)
 
-Copyright (c) 2014 Nacho Lopez
+Copyright (c) 2014-2015 Nacho Lopez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

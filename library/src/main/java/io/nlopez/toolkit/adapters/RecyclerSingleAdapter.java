@@ -1,33 +1,34 @@
 package io.nlopez.toolkit.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-
-import java.lang.reflect.Constructor;
-import java.util.List;
-
 import io.nlopez.toolkit.utils.BindableLayoutBuilder;
 import io.nlopez.toolkit.utils.ThreadHelper;
 import io.nlopez.toolkit.utils.ViewEventListener;
 import io.nlopez.toolkit.views.BindableLayout;
+import io.nlopez.toolkit.views.BindableViewHolder;
+
+import java.lang.reflect.Constructor;
+import java.util.List;
 
 /**
- * Created by mrm on 18/05/14.
+ * Created by mrm on 27/02/15.
  */
-public class SingleAdapter<T, Q extends BindableLayout<T>> extends BaseAdapter {
+public class RecyclerSingleAdapter<T, Q extends BindableLayout<T>> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     protected Class viewClass;
+
     protected List<T> listItems;
     protected ViewEventListener<T> viewEventListener;
     protected BindableLayoutBuilder<T, Q> builder;
 
-    public SingleAdapter(Class<Q> viewClass, List<T> listItems) {
-        this(viewClass, listItems, SingleAdapter.<T, Q>createDefaultBuilder(viewClass));
+    public RecyclerSingleAdapter(Class<Q> viewClass, List<T> listItems) {
+        this(viewClass, listItems, RecyclerSingleAdapter.<T, Q>createDefaultBuilder(viewClass));
     }
 
-    public SingleAdapter(Class<Q> viewClass, List<T> listItems, BindableLayoutBuilder<T, Q> builder) {
+    public RecyclerSingleAdapter(Class<Q> viewClass, List<T> listItems, BindableLayoutBuilder<T, Q> builder) {
         this.listItems = listItems;
         this.viewClass = viewClass;
         this.builder = builder;
@@ -77,14 +78,24 @@ public class SingleAdapter<T, Q extends BindableLayout<T>> extends BaseAdapter {
         }
     }
 
-    @Override
-    public int getCount() {
-        return listItems == null ? 0 : listItems.size();
+    private T getItem(int position) {
+        return listItems == null ? null : listItems.get(position);
     }
 
     @Override
-    public T getItem(int position) {
-        return listItems == null ? null : listItems.get(position);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        BindableLayout<T> viewGroup = builder.build(parent.getContext(), viewClass, null);
+        return new BindableViewHolder<>(viewGroup);
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        BindableViewHolder bindableViewHolder = (BindableViewHolder) holder;
+        bindableViewHolder.setViewEventListener(viewEventListener);
+        Object item = getItem(position);
+        if (item != null) {
+            bindableViewHolder.bind(item, position);
+        }
     }
 
     @Override
@@ -93,20 +104,12 @@ public class SingleAdapter<T, Q extends BindableLayout<T>> extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        BindableLayout<T> viewGroup = (BindableLayout<T>) convertView;
-        if (viewGroup == null) {
-            viewGroup = builder.build(parent.getContext(), getItem(position).getClass(), getItem(position));
-        }
-
-        if (viewGroup != null) {
-            viewGroup.setViewEventListener(viewEventListener);
-            viewGroup.bind(getItem(position), position);
-        }
-        return viewGroup;
+    public int getItemCount() {
+        return listItems == null ? 0 : listItems.size();
     }
 
-    private static <T, Q extends BindableLayout<T>> BindableLayoutBuilder<T, Q> createDefaultBuilder(final Class viewClass) {
+    private static <T, Q extends BindableLayout<T>> BindableLayoutBuilder<T, Q> createDefaultBuilder(
+            final Class viewClass) {
         return new BindableLayoutBuilder<T, Q>() {
             @Override
             public Q build(Context context, Class aClass, T item) {
