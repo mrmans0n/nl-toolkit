@@ -100,7 +100,7 @@ public class RecyclerMultiAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         BindableViewHolder bindableViewHolder = (BindableViewHolder) holder;
         bindableViewHolder.setViewEventListener(viewEventListener);
-        Object item = getItem(position);
+        Object item = listItems.get(position);
         if (item != null) {
             bindableViewHolder.bind(item, position);
         }
@@ -111,16 +111,12 @@ public class RecyclerMultiAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (listItems == null) {
             return 0;
         }
-        Object object = getItem(position);
+        Object object = listItems.get(position);
         int itemClassIndex = itemClassArray.indexOf(object.getClass());
         if (itemClassIndex == -1) {
             throw new RuntimeException("Object "+object.getClass().getCanonicalName()+" doesn't have an associated mapping");
         }
         return itemClassIndex;
-    }
-
-    private Object getItem(int position) {
-        return listItems == null ? null : listItems.get(position);
     }
 
     @Override

@@ -99,19 +99,19 @@ public class Adapters {
         return new RecyclerMultiAdapter(mapper, listItems, builder);
     }
 
-    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
-        return new RecyclerMultiAdapter(itemViewMapping, listItems);
+    public static AARecyclerMultiAdapter newAARecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems) {
+        return new AARecyclerMultiAdapter(itemViewMapping, listItems);
     }
 
-    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Mapper mapper, List listItems) {
-        return new RecyclerMultiAdapter(mapper, listItems);
+    public static AARecyclerMultiAdapter newAARecyclerMultiAdapter(Mapper mapper, List listItems) {
+        return new AARecyclerMultiAdapter(mapper, listItems);
     }
 
-    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
-        return new RecyclerMultiAdapter(itemViewMapping, listItems, builder);
+    public static AARecyclerMultiAdapter newAARecyclerMultiAdapter(Map<Class, Class<? extends BindableLayout>> itemViewMapping, List listItems, BindableLayoutBuilder builder) {
+        return new AARecyclerMultiAdapter(itemViewMapping, listItems, builder);
     }
 
-    public static RecyclerMultiAdapter newAARecyclerMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
-        return new RecyclerMultiAdapter(mapper, listItems, builder);
+    public static AARecyclerMultiAdapter newAARecyclerMultiAdapter(Mapper mapper, List listItems, BindableLayoutBuilder builder) {
+        return new AARecyclerMultiAdapter(mapper, listItems, builder);
     }
 }
