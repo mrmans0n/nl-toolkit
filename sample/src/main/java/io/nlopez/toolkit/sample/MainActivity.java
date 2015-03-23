@@ -9,17 +9,21 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import io.nlopez.toolkit.adapters.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.nlopez.toolkit.adapters.Adapters;
+import io.nlopez.toolkit.adapters.Mapper;
+import io.nlopez.toolkit.adapters.MultiAdapter;
+import io.nlopez.toolkit.adapters.RecyclerMultiAdapter;
+import io.nlopez.toolkit.adapters.RecyclerSingleAdapter;
+import io.nlopez.toolkit.adapters.SingleAdapter;
 import io.nlopez.toolkit.sample.model.TextAndImageItem;
 import io.nlopez.toolkit.sample.model.TextImageAndButtonItem;
 import io.nlopez.toolkit.sample.views.TextAndImageItemView;
 import io.nlopez.toolkit.sample.views.TextImageAndButtonItemView;
 import io.nlopez.toolkit.utils.ViewEventListener;
-import io.nlopez.toolkit.views.BindableLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Nacho Lopez on 28/10/13.
@@ -50,9 +54,9 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
         String[] dropdownValues = getResources().getStringArray(R.array.navigation_list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(bar.getThemedContext(),
-                                                                android.R.layout.simple_spinner_item,
-                                                                android.R.id.text1,
-                                                                dropdownValues);
+                android.R.layout.simple_spinner_item,
+                android.R.id.text1,
+                dropdownValues);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -78,10 +82,9 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 
         List items = generateRandomItems();
 
-        Map<Class, Class<? extends BindableLayout>> map = new Mapper()
+        Mapper map = new Mapper()
                 .add(TextAndImageItem.class, TextAndImageItemView.class)
-                .add(TextImageAndButtonItem.class, TextImageAndButtonItemView.class)
-                .asMap();
+                .add(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
 
         MultiAdapter adapter = Adapters.newMultiAdapter(map, items);
         adapter.setViewEventListener(this);
@@ -109,10 +112,9 @@ public class MainActivity extends Activity implements ActionBar.OnNavigationList
 
         List items = generateRandomItems();
 
-        Map<Class, Class<? extends BindableLayout>> map = new Mapper()
+        Mapper map = new Mapper()
                 .add(TextAndImageItem.class, TextAndImageItemView.class)
-                .add(TextImageAndButtonItem.class, TextImageAndButtonItemView.class)
-                .asMap();
+                .add(TextImageAndButtonItem.class, TextImageAndButtonItemView.class);
 
         RecyclerMultiAdapter adapter = Adapters.newRecyclerMultiAdapter(map, items);
         adapter.setViewEventListener(this);
