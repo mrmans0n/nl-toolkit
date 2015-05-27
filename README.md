@@ -15,6 +15,10 @@ compile 'io.nlopez.toolkit:library:1.0.2'
 Adapters
 --------
 
+# If you want to use the Generic adapters, please check out the [SmartAdapters](https://github.com/mrmans0n/smart-adapters) project instead. 
+
+This part is deprecated. Please use SmartAdapters!
+
 ### SingleAdapter
 
 Adapter that leverages all the work that needs to be done for a list with only one type of cells in display.
